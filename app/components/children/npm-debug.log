@@ -1,0 +1,30 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'D:\\Programs\\node.exe',
+1 verbose cli   'D:\\Programs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'prefix',
+1 verbose cli   '-g' ]
+2 info using npm@4.1.2
+3 info using node@v7.7.0
+4 verbose stack Error: write EPIPE
+4 verbose stack     at exports._errnoException (util.js:1029:11)
+4 verbose stack     at Socket._writeGeneric (net.js:718:26)
+4 verbose stack     at Socket._write (net.js:737:8)
+4 verbose stack     at doWrite (_stream_writable.js:329:12)
+4 verbose stack     at writeOrBuffer (_stream_writable.js:315:5)
+4 verbose stack     at Socket.Writable.write (_stream_writable.js:241:11)
+4 verbose stack     at Socket.write (net.js:664:40)
+4 verbose stack     at Console.log (console.js:43:16)
+4 verbose stack     at module.exports (D:\Programs\node_modules\npm\lib\utils\output.js:6:15)
+4 verbose stack     at EventEmitter.prefix (D:\Programs\node_modules\npm\lib\prefix.js:13:16)
+5 verbose cwd C:\Users\leung\Desktop\UCLA Coding Bootcamp\Homework\NYT-react\app\components\children
+6 error Windows_NT 10.0.15063
+7 error argv "D:\\Programs\\node.exe" "D:\\Programs\\node_modules\\npm\\bin\\npm-cli.js" "prefix" "-g"
+8 error node v7.7.0
+9 error npm  v4.1.2
+10 error code EPIPE
+11 error errno EPIPE
+12 error syscall write
+13 error write EPIPE
+14 error If you need help, you may report this error at:
+14 error     <https://github.com/npm/npm/issues>
+15 verbose exit [ 1, true ]
