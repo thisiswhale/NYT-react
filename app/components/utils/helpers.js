@@ -55,7 +55,17 @@ var helper = {
 //  This function posts new searches to our database.
   postSaved(title, url) {
     console.log("im in the helper", title, url);
-    return axios.post("/api/saved", { title, url });
+    return axios({
+      method: 'post',
+      url: '/api/saved',
+      data: {
+        title: title,
+        url: url,
+        date:Date.now()
+      }
+    });
+
+    // return axios.post("/api/saved", { title, url });
   },
 
   removeSaved(id){

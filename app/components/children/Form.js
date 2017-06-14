@@ -12,7 +12,6 @@ class Form extends React.Component {
       startYear: "",
       endYear: "",
       results: [],
-      saved: []
     };
 
     this.handleQueryChange = this.handleQueryChange.bind(this);

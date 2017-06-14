@@ -12,7 +12,6 @@ module.exports = {
   },
   // This method handles creating new quotes
   create: function(req, res) {
-    console.log("req",req);
     Article.create(req.body).then(function(doc) {
       console.log("doc");
       res.json(doc);

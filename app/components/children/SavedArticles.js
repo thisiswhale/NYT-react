@@ -1,19 +1,37 @@
 import React from "react";
-
 import helpers from "../utils/helpers";
-class SavedArticles extends React.Component {
 
-  // The moment the page renders get the Main
-  // componentDidMount() {
-  //   // Get the saved articles from db
-  //   helpers.getSaved().then(function(response) {
-  //     console.log(response);
-  //     if (response !== this.state.history) {
-  //       console.log("Saved", response.data);
-  //       //this.setState({saved: response.data});
-  //     }
-  //   }.bind(this));
-  // }
+class SavedArticles extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      saved: []
+    };
+  }
+  //The moment the page renders get the Main
+  componentDidMount() {
+    // Get the saved articles from db
+    helpers.getSaved().then(response => {
+      console.log("Saved", response.data[0]);
+      if (response !== this.state.saved) {
+        this.setState({saved: response.data});
+      }
+    });
+  }
+
+  componentDidUpdate() {
+    // Get the saved articles from db
+    helpers.getSaved().then(response => {
+        console.log("Updated Saved history", response.data);
+        this.setState({saved: response.data});
+
+    });
+  }
+
+  removeSaved(id){
+    helpers.removeSaved(id);
+    alert("Article removed");
+  }
 
   render(){
     return(
@@ -27,20 +45,21 @@ class SavedArticles extends React.Component {
 
         {/* <!-- This main panel will hold each of the resulting articles --> */}
         <div className="panel-body" id="add-section">
-          This is a test
-          {/* {this.props.saved.map(data=>{
-            return(
-              <div className="well" key={data.id_}>
-                <a href={data.url}><h3 className="articleHeadline">
-                  <span className="label label-primary">1</span><strong> {data.title}</strong>
+           {this.state.saved.map((data,i)=>(
+              <div className="well" key={data._id}>
+              <div>
+                <h3 className="articleHeadline">
+                  <a href={data.url}><span className="label label-primary">{i+1}</span><strong> {data.title}</strong></a>
                   <button
                     type="button"
-                    class="btn btn-success pull-right" id="saved-remove"><i class="fa fa-search"></i> Remove Article</button>
+                    className="btn btn-success pull-right"
+                    id="saved-remove"
+                    onClick={()=>this.removeSaved(data._id)}
+                    ><i className="fa fa-search"></i> Remove Article</button>
                 </h3>
-              </a>
               </div>
-            );
-          })} */}
+              </div>
+          ))}
         </div>
       </div>
 
