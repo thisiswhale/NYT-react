@@ -19,17 +19,18 @@ class SavedArticles extends React.Component {
     });
   }
 
-  componentDidUpdate() {
-    // Get the saved articles from db
-    helpers.getSaved().then(response => {
-        console.log("Updated Saved history", response.data);
-        this.setState({saved: response.data});
+  removeSaved(id){
+    helpers.removeSaved(id).then( () =>{
+
+      helpers.getSaved().then(response => {
+          console.log("Updated Saved history", response.data);
+          this.setState({saved: response.data});
+
+      });
 
     });
-  }
 
-  removeSaved(id){
-    helpers.removeSaved(id);
+
     alert("Article removed");
   }
 

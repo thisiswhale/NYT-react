@@ -21,18 +21,18 @@ var helper = {
     //   endYear == "2016"
     // }
 
-    var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json"
-    var apiKey = "59a1753423214dc192ad6e53c56523bd" +"&";
+    var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?"
+    var apiKey = "59a1753423214dc192ad6e53c56523bd";
     var q = query;
     var startDate = startYear+"0101";
     var endDate = endYear+"1231";
     queryURL = queryURL
-              +"?api-key=" +apiKey
-              +"?q=" +query
-              +"?begin_date=" +startDate
-              +"?end_date=" +endDate;
+              +"&api-key=" +apiKey
+              +"&q=" +query
+              +"&begin_date=" +startDate
+              +"&end_date=" +endDate;
     return axios.get(queryURL).then(response => {
-      console.log(response);
+      console.log("here is api called", response);
       for(var i =0; i < searchLimit; i++){
         //create empty object articles to store into results
         var articles = {};
