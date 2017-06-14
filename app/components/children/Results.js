@@ -1,9 +1,18 @@
 // Include React
 import React from "react";
-
+import helpers from "../utils/helpers";
 // Creating the Results component
 
 class Results extends React.Component{
+  constructor() {
+    super();
+  }
+
+  saveArticle(title, url){
+    console.log("You click to save ", title, url);
+    helpers.postSaved(title,url);
+  alert("Article saved!");
+  }
   // Here we render the function
   render() {
     return (
@@ -19,17 +28,25 @@ class Results extends React.Component{
         {/* <!-- This main panel will hold each of the resulting articles --> */}
         <div className="panel-body" id="add-section">
 
-          <div class="well" id="article-well-1">
-            <h3 class="articleHeadline"><span class="label label-primary">1</span><strong> A Long, Long Look at Obama’s Life, Mostly Before the White House</strong><button type="button" class="btn btn-success pull-right" id="run-search"><i class="fa fa-search"></i> Save</button></h3>
-            <h5>By MICHIKO KAKUTANI</h5>
-          </div>
-          <div class="well" id="article-well-2"><h3 class="articleHeadline"><span class="label label-primary">2</span><strong> Obama Says His Presidential Library Will Be a ‘Hub for the Community’</strong><button type="button" class="btn btn-success pull-right" id="run-search"><i class="fa fa-search"></i> Save</button></h3>
-            <h5>By JULIE BOSMAN</h5>
-          </div>
-          
+          {this.props.render.map((data,i)=> (
+             <div className="well" key={i}>
+               <div>
+                 <h3 className="articleHeadline">
+                 <a href={data.url}><span className="label label-primary">{i}</span><strong>{data.title}</strong></a>
+                 <button
+                   type="button"
+                   className="btn btn-success pull-right"
+                   id="save"
+                   onClick={() => this.saveArticle(data.title, data.url)}
+                   ><i className="fa fa-search"></i> Save Article</button>
+               </h3>
+             </div>
+             </div>
+
+         ))}
+
         </div>
       </div>
-
     );
   }
 }

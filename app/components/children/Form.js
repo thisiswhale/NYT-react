@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router";
+import Results from "./Results";
 
 import helpers from "../utils/helpers";
 
@@ -41,13 +42,14 @@ class Form extends React.Component {
     console.log("end: " + this.state.endYear);
 
     // Run the query for the address
-    helpers.runParameters(this.state.query, this.state.startYear, this.state.endYear).then(function(data) {
+    helpers.runParameters(this.state.query, this.state.startYear, this.state.endYear).then(data => {
+      console.log("callback recieved",data);
       //if our returned data is not the same from result, then setState
       if (data !== this.state.results) {
         console.log("Articles", data);
         this.setState({results: data});
       }
-    }.bind(this));
+    });
 
   }
 
@@ -64,7 +66,7 @@ class Form extends React.Component {
         <div className="panel-body">
 
           {/* <!-- Here we create an HTML Form for handling the inputs--> */}
-          <form role="form">
+          <form role="form" onSubmit={this.handleSubmit}>
 
             {/* <!-- Here we create the text box for capturing the search term--> */}
             <div className="form-group">
@@ -74,35 +76,42 @@ class Form extends React.Component {
 
             {/* <!-- Here we capture the Start Year Parameter--> */}
             <div className="form-group">
-              <label htmlFor="start-year">Start Year (Optional):</label>
-              <input type="text" className="form-control" id="start-year" value ={this.state.startYear} onChange={this.handleStartYearChange}/>
+              <label htmlFor="start-year">Start Year</label>
+              <input
+                type="text"
+                className="form-control"
+                id="start-year"
+                value ={this.state.startYear}
+                onChange={this.handleStartYearChange}/>
             </div>
 
             {/* <!-- Here we capture the End Year Parameter --> */}
             <div className="form-group">
-              <label htmlFor="end-year">End Year (Optional):</label>
-              <input type="text" className="form-control" id="end-year" value={this.state.endYear} onChange={this.handleEndYearChange}/>
+              <label htmlFor="end-year">End Year</label>
+              <input
+                type="text"
+                className="form-control"
+                id="end-year"
+                value={this.state.endYear}
+                onChange={this.handleEndYearChange}/>
             </div>
 
             {/* <!-- Here we have our final submit button --> */}
-            <Link to="/results">
-              <button type="submit" className="btn btn-default" id="run-search">
+              <button
+                type="submit"
+                className="btn btn-default"
+                id="run-search">
                 <i className="fa fa-search"></i>
                 Search</button>
-            </Link>
-            <Link to="/results">
-              <button className="btn btn-default" id="run-search">
-                <i className="fa fa-search"></i>
-                Search</button>
-            </Link>
+
           </form>
         </div>
 
         <div className="row">
           <div className="col-sm-12">
             <br/> {/*This code will dump the result components*/}
-            {this.props.children}
-
+            {/* {this.props.children} */}
+            <Results render={this.state.results}/>
           </div>
         </div>
 

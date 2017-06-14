@@ -22,7 +22,7 @@ var helper = {
     // }
 
     var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json"
-    var apiKey = "59a1753423214dc192ad6e53c56523bd";
+    var apiKey = "59a1753423214dc192ad6e53c56523bd" +"&";
     var q = query;
     var startDate = startYear+"0101";
     var endDate = endYear+"1231";
@@ -31,17 +31,16 @@ var helper = {
               +"?q=" +query
               +"?begin_date=" +startDate
               +"?end_date=" +endDate;
-              
-    axios.get(queryURL).then(response => {
-
+    return axios.get(queryURL).then(response => {
+      console.log(response);
       for(var i =0; i < searchLimit; i++){
         //create empty object articles to store into results
         var articles = {};
-        articles.title = response.response.docs[i].headline.main;
-        articles.url = response.response.docs[i].web_url;
+        articles.title = response.data.response.docs[i].headline.main;
+        articles.url = response.data.response.docs[i].web_url;
         articles.date= Date.now();
 
-        result.push(articles);
+        results.push(articles);
       }
       //send back to where its called
       return results;
@@ -54,8 +53,9 @@ var helper = {
   },
 
 //  This function posts new searches to our database.
-  postSaved(article) {
-    return axios.post(`/api/saved/${id}`, { article });
+  postSaved(title, url) {
+    console.log("im in the helper", title, url);
+    return axios.post("/api/saved", { title, url });
   },
 
   removeSaved(id){

@@ -31,12 +31,8 @@ const routes = (
   // The high level component is the Router component
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
-      <Route path="results" component={Results}/>
       <Route path="savedArticles" component={SavedArticles} />
-
-      {/* If user selects any other path... we get the Form Route */}
-      <IndexRoute component={SavedArticles} />
-
+    <IndexRoute component={Form} />
     </Route>
   </Router>
 
