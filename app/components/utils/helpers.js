@@ -1,7 +1,7 @@
 // Include the axios package for performing HTTP requests (promise based alternative to request)
 import axios from "axios";
 
-// Geocoder API
+// NYT API
 var apiKey = "59a1753423214dc192ad6e53c56523bd";
 
 // Helper functions for making API Calls
@@ -13,14 +13,6 @@ var helper = {
 
     //callback will be results
     var results = [];
-    // if(startYear == ""){
-    //   startYear == "1900";
-    // }
-    //
-    // if(endYear == ""){
-    //   endYear == "2016"
-    // }
-
     var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?"
     var apiKey = "59a1753423214dc192ad6e53c56523bd";
     var q = query;
@@ -65,7 +57,6 @@ var helper = {
       }
     });
 
-    // return axios.post("/api/saved", { title, url });
   },
 
   removeSaved(id){
